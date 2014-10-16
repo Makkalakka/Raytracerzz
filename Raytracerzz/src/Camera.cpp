@@ -1,5 +1,15 @@
 #include "Camera.h"
 
+Camera::Camera()
+{
+    position = glm::vec3(0,0,0);
+    viewDirection = glm::vec3(0,0,-1);
+    viewPlaneDistance = ;
+    viewPlaneResolution = ;
+    raysPerPixel = ;
+    pixels = ;
+}
+
 //loop over all pixels
 void renderImage()
 {

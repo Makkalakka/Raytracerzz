@@ -5,10 +5,10 @@
 class Rectangle
 {
     public:
-        Rectangle();
+        Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4);
         virtual ~Rectangle();
 
-        vector positionsOfCornerPoints;
+        glm::vec3 vertex1, vertex2, vertex3, vertex4;
 
         void calculateIntersections();
         void computationOfChildrenRays();

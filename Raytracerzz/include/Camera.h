@@ -7,12 +7,12 @@ class Camera
     public:
         Camera();
         virtual ~Camera();
-        vector position;
-        vector viewDirection;
+        glm::vec3 position;
+        glm::vec3 viewDirection;
         vector viewPlaneDistance;
         vector viewPlaneResolution;
         int raysPerPixel;
-        int pixels
+        int pixels;
 
         void renderImage(); //loop over all pixels
         void mappingFunction(); //convert radiometric pixel colour to photometric
