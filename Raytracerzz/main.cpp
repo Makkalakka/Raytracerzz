@@ -16,7 +16,7 @@
 
 using namespace std;
 
-int Main()
+int main()
 {
 
 }
