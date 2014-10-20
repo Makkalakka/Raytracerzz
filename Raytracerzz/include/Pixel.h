@@ -8,14 +8,13 @@ class Pixel
         Pixel();
         virtual ~Pixel();
 
-        int[] arrayOfRays; //holds and adresses all rays
-        vector colourOfPixel;
-
-        void shootingRays();
+        void shootRays();
 
 
     protected:
     private:
+        std::vector<Ray*> *arrayOfRays; //holds the adress to all rays shot from the eye point
+        glm::vec3 pixelColor;
 };
 
 #endif // PIXEL_H

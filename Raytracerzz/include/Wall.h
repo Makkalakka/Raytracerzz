@@ -2,16 +2,17 @@
 #define WALL_H
 
 
-class Wall
+class Wall : SceneObject
 {
     public:
         Wall();
         virtual ~Wall();
 
-        vector position;
+        glm::vec3 position;
         double size;
 
-        void initializationOfRectangleObjects();
+        glm::vec3 intersection(Ray r);
+        void initialize();
         void computationOfIntersections();
 
     protected:

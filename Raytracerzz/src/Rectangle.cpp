@@ -13,3 +13,8 @@ Rectangle::~Rectangle()
 {
     //dtor
 }
+
+glm::vec3 Rectangle::calculateIntersection(Ray r)
+{
+
+}

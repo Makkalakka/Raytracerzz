@@ -10,7 +10,7 @@ Pixel::~Pixel()
     //dtor
 }
 
-void shootingRays()
+void shootRays()
 {
 
 }
