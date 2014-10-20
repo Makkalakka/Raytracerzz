@@ -1,18 +1,16 @@
 #include <iostream>
 
-#include <glm/glm.hpp>
+#include "lib/glm/glm/glm.hpp"
 
 //classes
-#include "Ray.h"
-#include "Wall.h"
-#include "Camera.h"
-#include "Rectangle.h"
-#include "Cube.h"
+#include "include/Camera.h"
+#include "include/Scene.h"
+
 
 
 using namespace std;
 
 int main()
 {
-    //Camera cam = new Camera();
+    //Camera cam = new Camera(512, 512, 5, 3);
 }

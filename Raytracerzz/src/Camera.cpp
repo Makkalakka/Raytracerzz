@@ -1,4 +1,4 @@
-#include "Camera.h"
+#include "../include/Camera.h"
 
 Camera::Camera(int h, int w, int rpp, double vpd)
 {
@@ -16,13 +16,26 @@ void renderImage(Scene &world)
 {
     glm::vec3 *pixelValue = image;
 
-    for(unsigned h = 0; h<height; ++h)
-    {
-        for(unsigned w = 0; w<width; ++w, ++pixelValue)
-        {
-            //Pixel pix = new Pixel();//unfinished specs
+    double normW = 0, normH = 0;
 
-            //pix.shootRays();
+    glm::vec3 right = new glm::vec3(1, 0, 0);
+    glm::vec3 down = new glm::vec3(0, -1, 0);
+    glm::vec3 imagePoint;
+
+    for(unsigned h = 1; h<=height; ++h)
+    {
+        for(unsigned w = 1; w<=width; ++w, ++pixelValue)
+        {
+            normW = (w/width) - 0.5 - 1/width;
+            normH = (h/height) - 0.5 - 1/height;
+
+            imagePoint = normW*right + normH*down + viewDirection*viewPlaneDistance;
+
+            //glm::vec3 raydir = imagePoint - position;
+
+            Pixel pix = new Pixel(imagePoint, right*(1/width), down*(1/height), glm::vec3(0,0,0), raysPerPixel, world);//unfinished specs
+
+            pix.shootRays();
 
             //pixelValue = pix.getColor;
         }
