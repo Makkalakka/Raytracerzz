@@ -1,4 +1,6 @@
 #include "../include/Camera.h"
+#include "../include/Pixel.h"
+#include "../include/Scene.h"
 
 Camera::Camera(int h, int w, int rpp, double vpd)
 {
@@ -12,14 +14,14 @@ Camera::Camera(int h, int w, int rpp, double vpd)
 }
 
 //loop over all pixels
-void renderImage(Scene &world)
+void Camera::renderImage(Scene &world)
 {
     glm::vec3 *pixelValue = image;
 
-    double normW = 0, normH = 0;
+    float normW = 0, normH = 0;
 
-    glm::vec3 right = new glm::vec3(1, 0, 0);
-    glm::vec3 down = new glm::vec3(0, -1, 0);
+    glm::vec3 right = glm::vec3(1, 0, 0);
+    glm::vec3 down = glm::vec3(0, -1, 0);
     glm::vec3 imagePoint;
 
     for(unsigned h = 1; h<=height; ++h)
@@ -32,12 +34,14 @@ void renderImage(Scene &world)
             imagePoint = normW*right + normH*down + viewDirection*viewPlaneDistance;
 
             //glm::vec3 raydir = imagePoint - position;
+            float dx = 1/width;
+            float dy = 1/height;
 
-            Pixel pix = new Pixel(imagePoint, right*(1/width), down*(1/height), glm::vec3(0,0,0), raysPerPixel, world);//unfinished specs
+            Pixel *pix = new Pixel(imagePoint, right*dx, down*dy, glm::vec3(0,0,0), raysPerPixel, world);//unfinished specs
 
-            pix.shootRays();
+            pix->shootRays();
 
-            //pixelValue = pix.getColor;
+            *pixelValue = pix->getColor();
         }
     }
 
@@ -47,13 +51,13 @@ void renderImage(Scene &world)
 }
 
 //convert radiometric pixel colour to photometric
-void mappingFunction()
+void Camera::mappingFunction()
 {
 
 }
 
 //plot the figure or save it as an image
-void displayImage()
+void Camera::displayImage()
 {
 
 }

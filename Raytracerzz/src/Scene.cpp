@@ -1,4 +1,6 @@
-#include "Scene.h"
+#include "../include/Scene.h"
+#include "../include/SceneObject.h"
+#include "../include/Light.h"
 
 Scene::Scene()
 {

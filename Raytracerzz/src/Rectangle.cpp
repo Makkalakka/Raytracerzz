@@ -1,4 +1,5 @@
-#include "Rectangle.h"
+#include "../include/Rectangle.h"
+#include "../include/Ray.h"
 
 Rectangle::Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm::vec3 n)
 {

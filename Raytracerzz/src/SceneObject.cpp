@@ -1,4 +1,4 @@
-#include "SceneObject.h"
+#include "../include/SceneObject.h"
 
 SceneObject::SceneObject()
 {

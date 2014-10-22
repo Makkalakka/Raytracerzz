@@ -1,3 +1,5 @@
+#include "../lib/glm/glm/glm.hpp"
+
 #ifndef RAY_H
 #define RAY_H
 
@@ -5,10 +7,10 @@
 class Ray
 {
     public:
-        Ray(glm::vec3 theStartingPoint, glm::vec3 theDirection, double theImportance, ColorRGB theColor);
+        Ray(glm::vec3 theStartingPoint, glm::vec3 theDirection, double theImportance, glm::vec3 theColor);
         virtual ~Ray();
 
-        ColorRGB calculateColor();
+        glm::vec3 calculateColor();
         //you shoot shadow rays from the ray-surface intersection point to the point light sources
         void calculateLocalLightingContribution();
 
@@ -21,7 +23,7 @@ class Ray
         //how much importance this ray has from the parent ray
         double importance;
         //RGB vector of the ray
-        ColorRGB color;
+        glm::vec3 color;
         //if it finds the wall or left the room, leaves the room or is the last ray in the tree
         bool finalNode;
         //1 node for intransperent objects, 2 for transperent

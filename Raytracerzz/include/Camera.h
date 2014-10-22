@@ -1,6 +1,11 @@
+#include "../lib/glm/glm/glm.hpp"
+
 #ifndef CAMERA_H
 #define CAMERA_H
 
+
+class Pixel;
+class Scene;
 
 class Camera
 {
@@ -8,7 +13,7 @@ class Camera
         Camera(int h, int w, int rpp, double vpd);
         virtual ~Camera();
 
-        void renderImage(Scene world); //loop over all pixels
+        void renderImage(Scene &world); //loop over all pixels
         void mappingFunction(); //convert radiometric pixel colour to photometric
         void displayImage(); //plot the figure or save it as an image
 
@@ -16,11 +21,11 @@ class Camera
     private:
         glm::vec3 position;
         glm::vec3 viewDirection;
-        double viewPlaneDistance;
+        float viewPlaneDistance;
         int height;
         int width;
         int raysPerPixel;
-        glm::vec3 * image;
+        glm::vec3 *image;
 };
 
 #endif // CAMERA_H

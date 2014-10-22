@@ -1,3 +1,5 @@
+#include "../lib/glm/glm/glm.hpp"
+
 #ifndef LIGHT_H
 #define LIGHT_H
 
@@ -8,9 +10,9 @@ class Light
         Light();
         virtual ~Light();
 
-        double radiance;
-        vector position;
-        double size;
+        float radiance;
+        glm::vec3 position;
+        float size;
 
         void randomPosition();
 

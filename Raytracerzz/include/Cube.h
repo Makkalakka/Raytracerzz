@@ -1,6 +1,11 @@
+#include "../include/SceneObject.h"
+#include <vector>
+
 #ifndef CUBE_H
 #define CUBE_H
 
+class Rectangle;
+class Ray;
 
 class Cube : SceneObject
 {
@@ -10,14 +15,14 @@ class Cube : SceneObject
 
 
         void initialize();
-        void computationOfChildrenRays;
+        void computationOfChildrenRays();
 		glm::vec3 intersection(Ray r);
 
 
     protected:
     private:
 		glm::vec3 position;
-        double size;
+        float size;
         bool transparent;
         double refractiveIndex;
 		std::vector<Rectangle*> *walls;

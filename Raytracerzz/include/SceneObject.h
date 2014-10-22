@@ -1,6 +1,9 @@
+#include "../lib/glm/glm/glm.hpp"
+
 #ifndef SCENEOBJECT_H
 #define SCENEOBJECT_H
 
+class Ray;
 
 class SceneObject
 {

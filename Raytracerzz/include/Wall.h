@@ -1,6 +1,9 @@
+#include "../include/SceneObject.h"
+
 #ifndef WALL_H
 #define WALL_H
 
+class Ray;
 
 class Wall : SceneObject
 {

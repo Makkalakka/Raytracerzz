@@ -1,6 +1,10 @@
+#include <vector>
+
 #ifndef SCENE_H
 #define SCENE_H
 
+class SceneObject;
+class Light;
 
 class Scene
 {

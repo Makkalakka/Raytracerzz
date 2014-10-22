@@ -1,6 +1,9 @@
+#include "../lib/glm/glm/glm.hpp"
+
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
+class Ray;
 
 class Rectangle
 {

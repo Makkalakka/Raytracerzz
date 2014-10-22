@@ -12,5 +12,5 @@ using namespace std;
 
 int main()
 {
-    //Camera cam = new Camera(512, 512, 5, 3);
+    Camera *cam = new Camera(512, 512, 5, 3);
 }

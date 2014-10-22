@@ -1,4 +1,4 @@
-#include "Sphere.h"
+#include "../include/Sphere.h"
 
 //one transperent and one perfect reflector
 Sphere::Sphere()
