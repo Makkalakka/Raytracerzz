@@ -59,4 +59,3 @@ glm::vec3 Rectangle::getP()
 float Rectangle::getDistance()
 {
     return distance;
-}

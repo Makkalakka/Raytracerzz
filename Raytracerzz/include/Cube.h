@@ -2,7 +2,7 @@
 #define CUBE_H
 
 
-class Cube
+class Cube : SceneObject
 {
     public:
         Cube(glm::vec3 &pos, double &d, bool &t, double &idx);
@@ -10,7 +10,7 @@ class Cube
 
         void initialize();
         void computationOfChildrenRays;
-		glm::vec3 intersect(Ray r);
+		glm::vec3 intersection(Ray r);
 
 
     protected:
