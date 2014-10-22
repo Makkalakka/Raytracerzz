@@ -8,7 +8,6 @@ class Cube
         Cube(glm::vec3 &pos, double &d, bool &t, double &idx);
         virtual ~Cube();
 
-        
         void initialize();
         void computationOfChildrenRays;
 		glm::vec3 intersect(Ray r);
