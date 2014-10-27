@@ -7,24 +7,30 @@
 class Rectangle;
 class Ray;
 
-class Cube : SceneObject
+class Cube : public SceneObject
 {
     public:
-        Cube(glm::vec3 &pos, double &d, bool &t, double &idx);
+        Cube(glm::vec3 pos, double d, bool t, double idx, glm::vec3 theColor);
         virtual ~Cube();
 
         void initialize();
         void computationOfChildrenRays();
-		glm::vec3 intersection(Ray r);
+		bool intersection(Ray r);
+		glm::vec3 getLatestIntersection();
+		float getIntersectionDistance();
+		glm::vec3 getColor();
 
+		std::vector<Rectangle*> *walls;
 
-    protected:
     private:
 		glm::vec3 position;
         float size;
         bool transparent;
         double refractiveIndex;
-		std::vector<Rectangle*> *walls;
+        glm::vec3 objectColor;
+
+        glm::vec3 intersectionPoint;
+        float intersectionDistance;
 
 		//corner points
 		glm::vec3 p0, p1, p2, p3, p4, p5, p6, p7;

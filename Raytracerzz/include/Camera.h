@@ -11,7 +11,7 @@ class Camera
 {
     public:
         Camera(int h, int w, int rpp, double vpd);
-        virtual ~Camera();
+        ~Camera();
 
         void renderImage(Scene &world); //loop over all pixels
         void mappingFunction(); //convert radiometric pixel colour to photometric

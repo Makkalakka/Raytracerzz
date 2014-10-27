@@ -14,9 +14,9 @@ Sphere::~Sphere()
     //dtor
 }
 
-bool Sphere::calculateIntersection(Ray r)
+bool Sphere::intersection(Ray r)
 {
-    glm::vec3 L = position - r.startingPoint; //L is the vector between the ray.starting point and the sphere
+    /*glm::vec3 L = position - r.startingPoint; //L is the vector between the ray.starting point and the sphere
 
     float Tca = L.dot(r.direction);
     if(Tca < 0)
@@ -36,7 +36,7 @@ bool Sphere::calculateIntersection(Ray r)
     t1 = Tca + Thc; //t1 = distance from ray.startingPoint to the second intersection ANVÄND DESSA!
 
     p0 = r.startingPoint + r.direction*t0;
-    p1 = r.startingPoint + r.direction*t1;
+    p1 = r.startingPoint + r.direction*t1;*/
 
     return true;
 }
@@ -58,10 +58,10 @@ glm::vec3 Sphere::getP1()
 
 float Sphere::getDistanceT0()
 {
-    return t0;
+    return 0;
 }
 
 float Sphere::getDistanceT1()
 {
-    return t1;
+    return 0;
 }

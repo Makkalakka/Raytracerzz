@@ -1,7 +1,8 @@
 #include "../include/Rectangle.h"
 #include "../include/Ray.h"
+#include <iostream>
 
-Rectangle::Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm::vec3 n)
+Rectangle::Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm::vec3 n, glm::vec3 theColor)
 {
     corner1 = v1;
     corner2 = v2;
@@ -11,35 +12,45 @@ Rectangle::Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm
     basV2 = v3 - v2;
     origin = basV1 + basV2;
 	normal = n;
+	objectColor = theColor;
 }
 
-bool Rectangle::calculateIntersection(Ray r)
+bool Rectangle::intersection(Ray r)
 {
-    float denum = glm::dot(normal, r.direction);
-    if(denum > 1e-6)   // if the angle between the normal and the vector from the ray is perpenduícular then denum is Zero, and no intersection is made.
+
+    float denom = -(glm::dot(normal, r.direction));
+
+    if(denom > 1e-6)   // if the angle between the normal and the vector from the ray is perpenduícular then denum is Zero, and no intersection is made.
     {
-        glm::vec3 dist = origin - r.startingPoint;
-        distance = glm::dot(dist, normal)/denum; //distance is the distance from the ray.startingPoint to the intersected point on the plane
+
+        glm::vec3 dist = -(corner1 - r.startingPoint);
+        distance = glm::dot(dist, normal)/denom; //distance is the distance from the ray.startingPoint to the intersected point on the plane
+
         if (distance >= 0)
         {
-            glm::vec3 tempP = distance * glm::normalize(r.direction); //punkten
-            glm::vec3 vecP = tempP - v2; //vector P from v1
+
+            glm::vec3 tempP = distance * glm::normalize(r.direction); //the intersection point
+            glm::vec3 vecP = tempP - corner2; //vector from the intersection point to corner2 of the rectangle
 
             float lenghtBasV1 = glm::length(basV1);
             float lenghtBasV2 = glm::length(basV2);
 
-            float dot1 = glm::dot(vecP,glm::normalize(basV1));
-            float dot2 = glm::dot(vecP,glm::normalize(basV2));
+            float dot1 = glm::dot(vecP, glm::normalize(basV1));
+            float dot2 = glm::dot(vecP, glm::normalize(basV2));
 
             if(dot1 < lenghtBasV1 && dot1 > 0 && dot2 < lenghtBasV2  && dot2> 0)
             {
                 P = tempP;
                 return true;
             }
+            else
+                return false;
         }
         else
             return false;
     }
+    else
+        return false;
 }
 
 void Rectangle::computationOfChildrenRays()
@@ -52,11 +63,17 @@ Rectangle::~Rectangle()
     //dtor
 }
 
-glm::vec3 Rectangle::getP()
+glm::vec3 Rectangle::getLatestIntersection()
 {
     return P;
 }
 
-float Rectangle::getDistance()
+float Rectangle::getIntersectionDistance()
 {
     return distance;
+}
+
+glm::vec3 Rectangle::getColor()
+{
+    return objectColor;
+}
