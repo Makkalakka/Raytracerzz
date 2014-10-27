@@ -9,17 +9,22 @@ class Wall : SceneObject
 {
     public:
         Wall();
-        virtual ~Wall();
+        ~Wall();
 
         glm::vec3 position;
         double size;
 
-        glm::vec3 intersection(Ray r);
+        bool intersection(Ray r);
         void initialize();
         void computationOfIntersections();
+        glm::vec3 getLatestIntersection();
+        float getIntersectionDistance();
+        glm::vec3 getColor();
 
-    protected:
     private:
+        glm::vec3 objectColor;
+        glm::vec3 intersectionPoint;
+        float intersectionDistance;
 };
 
 #endif // WALL_H

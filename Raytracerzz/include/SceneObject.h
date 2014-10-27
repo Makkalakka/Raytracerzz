@@ -10,8 +10,11 @@ class SceneObject
     public:
         SceneObject();
         virtual ~SceneObject();
-        virtual glm::vec3 intersection(Ray r) = 0;
-    protected:
+        virtual bool intersection(Ray r) = 0;
+        virtual glm::vec3 getLatestIntersection() = 0;
+        virtual float getIntersectionDistance() = 0;
+        virtual glm::vec3 getColor() = 0;
+
     private:
 };
 

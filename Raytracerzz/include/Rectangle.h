@@ -1,20 +1,22 @@
 #include "../lib/glm/glm/glm.hpp"
+#include "../include/SceneObject.h"
 
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
 class Ray;
 
-class Rectangle
+class Rectangle : public SceneObject
 {
     public:
-        Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm::vec3 n);
+        Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm::vec3 n, glm::vec3 theColor);
         virtual ~Rectangle();
 
-        bool calculateIntersection(Ray r);
+        bool intersection(Ray r);
         void computationOfChildrenRays();
-        glm::vec3 Rectangle::getP();
-        float Rectangle::getDistance();
+        glm::vec3 getLatestIntersection();
+        float getIntersectionDistance();
+        glm::vec3 getColor();
 
     protected:
     private:
@@ -24,6 +26,7 @@ class Rectangle
 		glm::vec3 origin;
 		float distance;
 		glm::vec3 P;
+		glm::vec3 objectColor;
 };
 
 #endif // RECTANGLE_H

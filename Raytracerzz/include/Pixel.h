@@ -17,9 +17,8 @@ class Pixel
         glm::vec3 getColor();
 
 
-    protected:
     private:
-        std::vector<Ray*> *arrayOfRays; //holds the adress to all rays shot from the eye point
+        //std::vector<Ray*> *arrayOfRays; //holds the adress to all rays shot from the eye point
         glm::vec3 pixelColor;
         glm::vec3 corner, rightAxis, downAxis, cameraPos;
         int raysPerPixel;

@@ -1,5 +1,6 @@
 #include <vector>
 #include "../lib/glm/glm/glm.hpp"
+#include "../include/Ray.h"
 
 #ifndef SPHERE_H
 #define SPHERE_H
@@ -12,7 +13,9 @@ class Sphere
         virtual ~Sphere();
 
         //calculates the intersection of a ray and a shpere
-        bool calculateIntersection(Ray r);
+        bool intersection(Ray r);
+        glm::vec3 getLatestIntersection();
+        float getIntersectionDistance();
         //depends on the texture of the sphere
         void calculateChildrenRays();
 

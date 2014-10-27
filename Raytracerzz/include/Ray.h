@@ -14,12 +14,14 @@ class Ray
         //you shoot shadow rays from the ray-surface intersection point to the point light sources
         void calculateLocalLightingContribution();
 
-    protected:
-    private:
         //the eye position
         glm::vec3 startingPoint;
         //diection of the random generated ray?
         glm::vec3 direction;
+
+
+    private:
+
         //how much importance this ray has from the parent ray
         double importance;
         //RGB vector of the ray
@@ -31,6 +33,8 @@ class Ray
         Ray *refractedRay;
         //inside or outside an transperent object
         bool insideObject;
+
+
 };
 
 #endif // RAY_H

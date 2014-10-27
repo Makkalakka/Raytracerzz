@@ -14,10 +14,11 @@ class Scene
         void addObject(SceneObject *so);
         void addLight(Light *li);
 
-    protected:
-    private:
         std::vector<SceneObject*> *Objects;
         std::vector<Light*> *Lights;
+
+    private:
+
 };
 
 #endif // SCENE_H
