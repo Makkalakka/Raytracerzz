@@ -3,24 +3,27 @@
 #ifndef RAY_H
 #define RAY_H
 
+class Scene;
 
 class Ray
 {
     public:
-        Ray(glm::vec3 theStartingPoint, glm::vec3 theDirection, double theImportance, glm::vec3 theColor);
+        Ray(glm::vec3 theStartingPoint, glm::vec3 theDirection, double theImportance, Scene *w);
         virtual ~Ray();
 
         glm::vec3 calculateColor();
         //you shoot shadow rays from the ray-surface intersection point to the point light sources
-        void calculateLocalLightingContribution();
+        glm::vec3 getLocalColor();
+
 
         //the eye position
         glm::vec3 startingPoint;
         //diection of the random generated ray?
         glm::vec3 direction;
 
-
     private:
+
+
 
         //how much importance this ray has from the parent ray
         double importance;
@@ -33,6 +36,8 @@ class Ray
         Ray *refractedRay;
         //inside or outside an transperent object
         bool insideObject;
+
+        Scene *world;
 
 
 };
