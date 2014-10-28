@@ -70,7 +70,8 @@ void Camera::renderImage(Scene &world)
     std::cout << "Writing data to .ppm-file" << std::endl;
     //Writes image values to file here...
     // Save result to a PPM image (keep these flags if you compile under Windows)
-	std::ofstream ofs("Documents/Github/Raytracerzz/Raytracerzz/whitted.ppm", std::ios::out | std::ios::binary);
+    std::ofstream ofs("./whitted.ppm", std::ios::out | std::ios::binary);
+	//std::ofstream ofs("Documents/Github/Raytracerzz/Raytracerzz/whitted.ppm", std::ios::out | std::ios::binary);
 
 	ofs << "P6\n" << width << " " << height << "\n255\n";
 
