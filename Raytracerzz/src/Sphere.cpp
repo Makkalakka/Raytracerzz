@@ -18,14 +18,14 @@ bool Sphere::intersection(Ray r)
 {
     /*glm::vec3 L = position - r.startingPoint; //L is the vector between the ray.starting point and the sphere
 
-    float Tca = L.dot(r.direction);
+    float Tca = glm::dot(L,r.direction);
     if(Tca < 0)
     {
         return false;
     }
 
-    float d2 =  L.dot(L) - Tca * Tca;
-    if(d > radius*radius)
+    float d2 =  glm::dot(L,L) - Tca * Tca;
+    if(d > radius*radius) //d = sqrt(d2) ??
     {
         return false;
     }
