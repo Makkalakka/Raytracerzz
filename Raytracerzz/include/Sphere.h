@@ -1,15 +1,16 @@
 #include <vector>
 #include "../lib/glm/glm/glm.hpp"
-#include "../include/Ray.h"
+#include "../include/SceneObject.h"
 
 #ifndef SPHERE_H
 #define SPHERE_H
 
+class Ray;
 
-class Sphere
+class Sphere : public SceneObject
 {
     public:
-        Sphere(glm::vec3 pos, double rad, double trans, double refract);
+        Sphere(glm::vec3 pos, double rad, double trans, double refract, glm::vec3 color);
         virtual ~Sphere();
 
         //calculates the intersection of a ray and a shpere
@@ -23,6 +24,7 @@ class Sphere
         glm::vec3 getP1();
         float getDistanceT0();
         float getDistanceT1();
+        glm::vec3 getColor();
 
     protected:
     private:
@@ -30,8 +32,9 @@ class Sphere
         double radius;
         double transparency;
         double refractiveIndex; //1.0 <-> 1.5
-        glm::vec3 t0;
-        glm::vec3 t1;
+        glm::vec3 color;
+        float t0;
+        float t1;
         glm::vec3 p0;
         glm::vec3 p1;
 };
