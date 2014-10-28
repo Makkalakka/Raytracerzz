@@ -36,21 +36,30 @@ void Pixel::shootRays()
 
     //check intersection, get color from object
     int nrOfObj = world->Objects->size();
-
+    int objectIdx = -1;
+    float minDist = 999999;
 
 
     for(int i=0; i<nrOfObj; i++)
     {
         if(world->Objects->at(i)->intersection(pixelRay))
         {
-            glm::vec3 theIntersection = world->Objects->at(i)->getLatestIntersection();
-            std::cout << "found intersection at: " << theIntersection.x << ", " << theIntersection.y << ", " << theIntersection.z << std::endl;
-
-            pixColor = world->Objects->at(i)->getColor();
+            if(world->Objects->at(i)->getIntersectionDistance() < minDist)
+            {
+                objectIdx = i;
+                minDist = world->Objects->at(i)->getIntersectionDistance();
+            }
         }
-        else
-            pixColor = glm::vec3(0,0,0);
     }
+
+    //glm::vec3 theIntersection = world->Objects->at(i)->getLatestIntersection();
+            //std::cout << "found intersection at: " << theIntersection.x << ", " << theIntersection.y << ", " << theIntersection.z << std::endl;
+    if(objectIdx != -1)
+    {
+        pixColor = world->Objects->at(objectIdx)->getColor();
+    }
+    else
+        pixColor = glm::vec3(0,0,0);
 
 
 

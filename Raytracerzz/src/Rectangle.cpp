@@ -38,7 +38,7 @@ bool Rectangle::intersection(Ray r)
             float dot1 = glm::dot(vecP, glm::normalize(basV1));
             float dot2 = glm::dot(vecP, glm::normalize(basV2));
 
-            if(dot1 < lenghtBasV1 && dot1 > 0 && dot2 < lenghtBasV2  && dot2> 0)
+            if(dot1 <= lenghtBasV1 && dot1 >= 0 && dot2 <= lenghtBasV2  && dot2 >= 0)
             {
                 P = tempP;
                 return true;

@@ -12,6 +12,7 @@ Cube::Cube(glm::vec3 pos, double d, bool t, double idx, glm::vec3 color)
 	transparent = t;
 	refractiveIndex = idx;
 	objectColor = color;
+	walls = new std::vector<Rectangle*>();
 }
 
 Cube::~Cube(){}
@@ -33,7 +34,7 @@ void Cube::initialize()
 	p7 = glm::vec3(1, 0, 1)*size + position;
 
 
-	walls->push_back(new Rectangle(p0, p3, p2, p1, glm::vec3(0, 0, -1), objectColor)); //bottom
+	walls->push_back(new Rectangle(p0, p1, p2, p3, glm::vec3(0, 0, -1), objectColor)); //bottom
 	walls->push_back(new Rectangle(p0, p4, p5, p1, glm::vec3(-1, 0, 0), objectColor)); //left
 	walls->push_back(new Rectangle(p1, p5, p6, p2, glm::vec3(0, 1, 0), objectColor)); //back
 	walls->push_back(new Rectangle(p3, p2, p6, p7, glm::vec3(1, 0, 0), objectColor)); //right
@@ -58,8 +59,6 @@ bool Cube::intersection(Ray r)
         }
     }
 
-    std::cout << "rectangleIdx: " << rectangleIdx << std::endl;
-
     if(rectangleIdx != -1)
     {
         intersectionDistance = minDist;
@@ -68,7 +67,6 @@ bool Cube::intersection(Ray r)
     }
     else
         return false;
-
 }
 
 glm::vec3 Cube::getColor()

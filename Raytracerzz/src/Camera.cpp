@@ -41,10 +41,12 @@ void Camera::renderImage(Scene &world)
     {
         for(unsigned w = 1; w<=width; ++w, ++pixelValue)
         {
+            float viewRatio = (float)width/height;
+
             float dx = 1/(float)width;
             float dy = 1/(float)height;
 
-            normW = (w/(float)width) - 0.5; //- dx;
+            normW = ((w/(float)width) - 0.5)*viewRatio; //- dx;
             normH = (h/(float)height) - 0.5;// - dy;
 
             imagePoint = normW*right + normH*down + viewDirection*viewPlaneDistance;
@@ -53,7 +55,7 @@ void Camera::renderImage(Scene &world)
 
             Pixel *pix = new Pixel(imagePoint, right*dx, down*dy, glm::vec3(0,0,0), raysPerPixel, world);//unfinished specs
 
-            std::cout << "shooting ray from pixel" << std::endl;
+            //std::cout << "shooting ray from pixel" << std::endl;
 
             pix->shootRays();
 

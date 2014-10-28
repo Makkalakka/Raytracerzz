@@ -236,7 +236,7 @@
 
 1383996846 d:\dokument\programmering\raytracerzz\raytracerzz\lib\glm\glm\core\func_noise.inl
 
-1414408450 source:/Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/main.cpp
+1414422646 source:/Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/main.cpp
 	<iostream>
 	"lib/glm/glm/glm.hpp"
 	"include/Camera.h"
@@ -483,7 +483,7 @@
 1414321373 /Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/include/Scene.h
 	<vector>
 
-1414409315 source:/Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/src/Camera.cpp
+1414420477 source:/Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/src/Camera.cpp
 	"../include/Camera.h"
 	"../include/Pixel.h"
 	"../include/Scene.h"
@@ -495,7 +495,7 @@
 	<vector>
 	"../lib/glm/glm/glm.hpp"
 
-1414408672 source:/Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/src/Cube.cpp
+1414419853 source:/Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/src/Cube.cpp
 	"../include/Cube.h"
 	"../include/SceneObject.h"
 	"../include/Rectangle.h"
@@ -522,7 +522,7 @@
 1413971852 /Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/include/Light.h
 	"../lib/glm/glm/glm.hpp"
 
-1414409710 source:/Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/src/Pixel.cpp
+1414416332 source:/Users/albintornqvist/Documents/GitHub/Raytracerzz/Raytracerzz/src/Pixel.cpp
 	"../include/Pixel.h"
 	"../include/Ray.h"
 	"../include/Scene.h"
