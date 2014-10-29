@@ -16,6 +16,7 @@ class Rectangle : public SceneObject
         void computationOfChildrenRays();
         glm::vec3 getLatestIntersection();
         float getIntersectionDistance();
+        glm::vec3 getIntersectionNormal();
         glm::vec3 getColor();
 
     protected:
@@ -27,6 +28,7 @@ class Rectangle : public SceneObject
 		float distance;
 		glm::vec3 P;
 		glm::vec3 objectColor;
+
 };
 
 #endif // RECTANGLE_H

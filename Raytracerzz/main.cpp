@@ -7,6 +7,7 @@
 #include "include/Rectangle.h"
 #include "include/Cube.h"
 #include "include/Sphere.h"
+#include "include/Light.h"
 
 using namespace std;
 
@@ -14,10 +15,10 @@ int main()
 {
     Scene world;
 
-    float d = 15, h = 3, w = 4;
+    float d = 15, h = 3, w = 4; //d = distance from camera, height, width
 
-    Sphere *sphere1 = new Sphere(glm::vec3(1, 6, 1), 0.5, 1.0, 1.0, glm::vec3(0.2,0.4,0.6));
-    Sphere *sphere2 = new Sphere(glm::vec3(1.2, 6, 1.2), 0.6, 1.0, 1.0, glm::vec3(0.6,0.4,0.6));
+    Sphere *sphere1 = new Sphere(glm::vec3(0, 6.5, -1.2), 0.5, 1.0, 1.0, glm::vec3(0.2,0.4,0.6));
+    Sphere *sphere2 = new Sphere(glm::vec3(-1.5, 8.5, -1.2), 0.6, 1.0, 1.0, glm::vec3(0.6,0.4,0.6));
 
     Rectangle *rec = new Rectangle(glm::vec3(-w, d, h), glm::vec3(-w, d, -h), glm::vec3(w, d, -h), glm::vec3(w, d, h), glm::vec3(0, -1, 0), glm::vec3(1,0,0)); //back
     Rectangle *rec2 = new Rectangle(glm::vec3(-w, d, h), glm::vec3(-w, (d-2*w), h), glm::vec3(-w, (d-2*w), -h), glm::vec3(-w, d, -h), glm::vec3(1, 0, 0), glm::vec3(0,0,1)); //left
@@ -25,7 +26,7 @@ int main()
     Rectangle *rec4 = new Rectangle(glm::vec3(w, d, h), glm::vec3(w, d, -h), glm::vec3(w, (d-2*w), -h), glm::vec3(w, (d-2*w), h), glm::vec3(-1, 0, 0), glm::vec3(0,0,1)); //right
     Rectangle *rec5 = new Rectangle(glm::vec3(-w, d, h), glm::vec3(w, d, h), glm::vec3(w, (d-2*w), h), glm::vec3(-w, (d-2*w), h), glm::vec3(0, 0, -1), glm::vec3(0,1,0)); //roof
 
-    Cube *theCube = new Cube(glm::vec3(-1.5, 4, -1.5), 1, false, 0, glm::vec3(0.8, 0.8, 0));
+    Cube *theCube = new Cube(glm::vec3(2, 11, -2.7), 1.2, false, 0, glm::vec3(0.8, 0.8, 0));
     theCube->initialize();
 
     world.addObject(theCube);
@@ -36,6 +37,14 @@ int main()
     world.addObject(rec5);
     world.addObject(sphere1);
     world.addObject(sphere2);
+
+    //Adding lightsources
+    Light *li1 = new Light(glm::vec3(0, 5, 0.5), glm::vec3(1, 1, 1), 1);
+    Sphere *lightsphere = new Sphere(glm::vec3(0, 10, 2), 0.1, 1.0, 1.0, glm::vec3(0,0,1));
+
+    world.addLight(li1);
+    world.addObject(lightsphere);
+
 
     cout << "Creating camera..." << endl;
 
@@ -53,4 +62,6 @@ int main()
     delete sphere1;
     delete sphere2;
     delete theCube;
+    delete li1;
+    delete lightsphere;
 }

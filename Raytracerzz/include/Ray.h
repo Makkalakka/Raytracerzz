@@ -8,12 +8,12 @@ class Scene;
 class Ray
 {
     public:
-        Ray(glm::vec3 theStartingPoint, glm::vec3 theDirection, double theImportance, Scene *w);
+        Ray(glm::vec3 theStartingPoint, glm::vec3 theDirection, float theImportance, Scene *w);
         virtual ~Ray();
 
         glm::vec3 calculateColor();
         //you shoot shadow rays from the ray-surface intersection point to the point light sources
-        glm::vec3 getLocalColor();
+        glm::vec3 getLocalColor(glm::vec3 objColor, glm::vec3 n, glm::vec3 iPoint);
 
 
         //the eye position
@@ -26,7 +26,7 @@ class Ray
 
 
         //how much importance this ray has from the parent ray
-        double importance;
+        float importance;
         //RGB vector of the ray
         glm::vec3 color;
         //if it finds the wall or left the room, leaves the room or is the last ray in the tree

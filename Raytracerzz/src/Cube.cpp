@@ -63,6 +63,7 @@ bool Cube::intersection(Ray r)
     {
         intersectionDistance = minDist;
         intersectionPoint = walls->at(rectangleIdx)->getLatestIntersection();
+        intersectionNormal = walls->at(rectangleIdx)->getIntersectionNormal();
         return true;
     }
     else
@@ -82,6 +83,11 @@ glm::vec3 Cube::getLatestIntersection()
 float Cube::getIntersectionDistance()
 {
     return intersectionDistance;
+}
+
+glm::vec3 Cube::getIntersectionNormal()
+{
+    return intersectionNormal;
 }
 
 

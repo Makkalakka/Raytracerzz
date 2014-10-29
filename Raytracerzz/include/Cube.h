@@ -18,6 +18,7 @@ class Cube : public SceneObject
 		bool intersection(Ray r);
 		glm::vec3 getLatestIntersection();
 		float getIntersectionDistance();
+		glm::vec3 getIntersectionNormal();
 		glm::vec3 getColor();
 
 		std::vector<Rectangle*> *walls;
@@ -31,6 +32,7 @@ class Cube : public SceneObject
 
         glm::vec3 intersectionPoint;
         float intersectionDistance;
+        glm::vec3 intersectionNormal;
 
 		//corner points
 		glm::vec3 p0, p1, p2, p3, p4, p5, p6, p7;

@@ -14,6 +14,7 @@ class SceneObject
         virtual glm::vec3 getLatestIntersection() = 0;
         virtual float getIntersectionDistance() = 0;
         virtual glm::vec3 getColor() = 0;
+        virtual glm::vec3 getIntersectionNormal() = 0;
 
     private:
 };

@@ -29,7 +29,7 @@ bool Rectangle::intersection(Ray r)
         if (distance >= 0)
         {
 
-            glm::vec3 tempP = distance * glm::normalize(r.direction); //the intersection point
+            glm::vec3 tempP = r.startingPoint + distance * glm::normalize(r.direction); //the intersection point
             glm::vec3 vecP = tempP - corner2; //vector from the intersection point to corner2 of the rectangle
 
             float lenghtBasV1 = glm::length(basV1);
@@ -71,6 +71,11 @@ glm::vec3 Rectangle::getLatestIntersection()
 float Rectangle::getIntersectionDistance()
 {
     return distance;
+}
+
+glm::vec3 Rectangle::getIntersectionNormal()
+{
+    return normal;
 }
 
 glm::vec3 Rectangle::getColor()

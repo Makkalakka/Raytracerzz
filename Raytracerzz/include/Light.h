@@ -7,16 +7,15 @@
 class Light
 {
     public:
-        Light();
+        Light(glm::vec3 pos, glm::vec3 col, float r);
         virtual ~Light();
 
         float radiance;
         glm::vec3 position;
-        float size;
+        glm::vec3 color;
 
-        void randomPosition();
+        //void randomPosition();
 
-    protected:
     private:
 };
 

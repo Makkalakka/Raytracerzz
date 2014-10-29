@@ -61,6 +61,12 @@ float Sphere::getIntersectionDistance()
     return t0;
 }
 
+glm::vec3 Sphere::getIntersectionNormal()
+{
+
+    return glm::normalize(p0 - position);
+}
+
 glm::vec3 Sphere::getColor()
 {
     return color;

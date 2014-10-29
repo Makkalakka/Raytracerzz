@@ -17,6 +17,7 @@ class Sphere : public SceneObject
         bool intersection(Ray r);
         glm::vec3 getLatestIntersection();
         float getIntersectionDistance();
+        glm::vec3 getIntersectionNormal();
         //depends on the texture of the sphere
         void calculateChildrenRays();
 
@@ -37,6 +38,7 @@ class Sphere : public SceneObject
         float t1;
         glm::vec3 p0;
         glm::vec3 p1;
+        glm::vec3 intersectionNormal;
 };
 
 #endif // SPHERE_H
