@@ -1,6 +1,7 @@
 #include "../include/Rectangle.h"
 #include "../include/Ray.h"
 #include <iostream>
+#include <cmath>
 
 Rectangle::Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm::vec3 n, glm::vec3 theColor)
 {
@@ -13,6 +14,8 @@ Rectangle::Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm
     origin = basV1 + basV2;
 	normal = n;
 	objectColor = theColor;
+	insideCube = false;
+	refractiveIndex = 1.0;
 }
 
 bool Rectangle::intersection(Ray r)
@@ -53,9 +56,23 @@ bool Rectangle::intersection(Ray r)
         return false;
 }
 
-void Rectangle::computationOfChildrenRays()
+ glm::vec3 Rectangle::calculateReflectedRay(Ray r)
 {
+    return (r.direction - 2*(glm::dot(r.direction,normal))*normal);
+}
 
+glm::vec3 Rectangle::calculateRefractedRay(Ray r)
+{
+    if(insideCube)
+    {
+        insideCube = false;
+        return (refractiveIndex*r.direction + normal*(-refractiveIndex*glm::dot(normal,-(r.direction)) - (float)sqrt(1-pow(refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray out of the sphere
+    }
+    else
+    {
+        insideCube = true;
+        return ((1/refractiveIndex)*r.direction + normal*(-1/refractiveIndex*glm::dot(normal,-(r.direction)) - (float)sqrt(1-pow(1/refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray into the sphere
+    }
 }
 
 Rectangle::~Rectangle()
