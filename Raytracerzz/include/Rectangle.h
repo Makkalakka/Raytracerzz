@@ -13,7 +13,8 @@ class Rectangle : public SceneObject
         virtual ~Rectangle();
 
         bool intersection(Ray r);
-        void computationOfChildrenRays();
+        glm::vec3 calculateReflectedRay(Ray r);
+        glm::vec3 calculateRefractedRay(Ray r);
         glm::vec3 getLatestIntersection();
         float getIntersectionDistance();
         glm::vec3 getIntersectionNormal();
@@ -28,6 +29,9 @@ class Rectangle : public SceneObject
 		float distance;
 		glm::vec3 P;
 		glm::vec3 objectColor;
+
+		bool insideCube;
+		float refractiveIndex = 1.0;
 
 };
 
