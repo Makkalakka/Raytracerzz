@@ -13,6 +13,9 @@ Cube::Cube(glm::vec3 pos, double d, bool t, double idx, glm::vec3 color)
 	refractiveIndex = idx;
 	objectColor = color;
 	walls = new std::vector<Rectangle*>();
+	isDiffuse = true;
+	isTransparent = false;
+	diffuseIndex = 1;
 }
 
 Cube::~Cube(){}
@@ -90,4 +93,14 @@ glm::vec3 Cube::getIntersectionNormal()
     return intersectionNormal;
 }
 
+glm::vec3 Cube::calculateReflectedRay(Ray r)
+{
+    return glm::vec3(0,0,1);
+}
+
+
+glm::vec3 Cube::calculateRefractedRay(Ray r)
+{
+    return glm::vec3(0,0,1);
+}
 

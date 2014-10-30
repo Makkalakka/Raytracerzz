@@ -19,6 +19,9 @@ class Rectangle : public SceneObject
         float getIntersectionDistance();
         glm::vec3 getIntersectionNormal();
         glm::vec3 getColor();
+        bool isDiffuse;
+        bool isTransparent;
+        float diffuseIndex;
 
     protected:
     private:
@@ -30,8 +33,7 @@ class Rectangle : public SceneObject
 		glm::vec3 P;
 		glm::vec3 objectColor;
 
-		bool insideCube;
-		float refractiveIndex = 1.0;
+		float refractiveIndex;
 
 };
 

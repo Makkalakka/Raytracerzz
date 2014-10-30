@@ -14,8 +14,10 @@ Rectangle::Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm
     origin = basV1 + basV2;
 	normal = n;
 	objectColor = theColor;
-	insideCube = false;
 	refractiveIndex = 1.0;
+	isDiffuse = true;
+	isTransparent = false;
+	diffuseIndex = 1;
 }
 
 bool Rectangle::intersection(Ray r)
@@ -63,14 +65,14 @@ bool Rectangle::intersection(Ray r)
 
 glm::vec3 Rectangle::calculateRefractedRay(Ray r)
 {
-    if(insideCube)
+    if(r.insideObject)
     {
-        insideCube = false;
+        r.insideObject = false;
         return (refractiveIndex*r.direction + normal*(-refractiveIndex*glm::dot(normal,-(r.direction)) - (float)sqrt(1-pow(refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray out of the sphere
     }
     else
     {
-        insideCube = true;
+        r.insideObject = true;
         return ((1/refractiveIndex)*r.direction + normal*(-1/refractiveIndex*glm::dot(normal,-(r.direction)) - (float)sqrt(1-pow(1/refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray into the sphere
     }
 }

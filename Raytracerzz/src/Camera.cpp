@@ -46,8 +46,8 @@ void Camera::renderImage(Scene &world)
             float dx = 1/(float)width;
             float dy = 1/(float)height;
 
-            normW = ((w/(float)width) - 0.5)*viewRatio; //- dx;
-            normH = (h/(float)height) - 0.5;// - dy;
+            normW = ((w/(float)width) - 0.5 - dx)*viewRatio;
+            normH = (h/(float)height) - 0.5 - dy;
 
             imagePoint = normW*right + normH*down + viewDirection*viewPlaneDistance;
 

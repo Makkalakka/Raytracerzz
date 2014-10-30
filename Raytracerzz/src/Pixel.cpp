@@ -5,13 +5,13 @@
 #include <iostream>
 
 
-Pixel::Pixel(glm::vec3 c, glm::vec3 right, glm::vec3 down, glm::vec3 cPos, int rpp, Scene &w)
+Pixel::Pixel(glm::vec3 c, glm::vec3 right, glm::vec3 down, glm::vec3 cPos, int rpps, Scene &w)
 {
     corner = c;
     rightAxis = right;
     downAxis = down;
     cameraPos = cPos;
-    raysPerPixel = rpp;
+    raysPerPixel = rpps;
     world = &w;
     pixColor = glm::vec3(0,0,0);
 }
@@ -28,14 +28,18 @@ glm::vec3 Pixel::getColor()
 
 void Pixel::shootRays()
 {
-    glm::vec3 rayDir = glm::normalize(corner - cameraPos);
+    for(int i=0; i<raysPerPixel; i++)
+    {
+        glm::vec3 newPoint = corner + rightAxis*static_cast<float>(rand())/static_cast<float>(RAND_MAX) + downAxis*static_cast<float>(rand())/static_cast<float>(RAND_MAX);
 
+        glm::vec3 rayDir = glm::normalize(newPoint - cameraPos);
 
-    //for(raysPerPixel)
+        Ray pixelRay = Ray(cameraPos, rayDir, 1.0, world);
 
-    Ray pixelRay = Ray(cameraPos, rayDir, 1.0, world);
+        pixColor += pixelRay.rayTracedColor(0);
+    }
 
-    pixColor = pixelRay.calculateColor();
+    pixColor /= raysPerPixel;
 
 
 }

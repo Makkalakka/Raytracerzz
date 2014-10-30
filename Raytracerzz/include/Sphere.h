@@ -10,7 +10,7 @@ class Ray;
 class Sphere : public SceneObject
 {
     public:
-        Sphere(glm::vec3 pos, float rad, float trans, float refract, glm::vec3 color);
+        Sphere(glm::vec3 pos, float rad, float diffIdx, float refract, glm::vec3 color, bool transparent);
         virtual ~Sphere();
 
         //calculates the intersection of a ray and a shpere
@@ -18,7 +18,7 @@ class Sphere : public SceneObject
         glm::vec3 getLatestIntersection();
         float getIntersectionDistance();
         glm::vec3 getIntersectionNormal();
-        //depends on the texture of the sphere
+        //depends on the texture of the spheress
         glm::vec3 calculateReflectedRay(Ray r);
         glm::vec3 calculateRefractedRay(Ray r);
 
@@ -27,15 +27,16 @@ class Sphere : public SceneObject
         float getDistanceT0();
         float getDistanceT1();
         glm::vec3 getColor();
+        bool isDiffuse;
+        bool isTransparent;
+        float diffuseIndex;
 
     protected:
     private:
         glm::vec3 position;
         float radius;
-        float transparency;
         float refractiveIndex; //>1.0, <1.5
         glm::vec3 color;
-        bool insideSphere;
         float t0;
         float t1;
         glm::vec3 p0;

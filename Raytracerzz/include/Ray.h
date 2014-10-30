@@ -11,15 +11,19 @@ class Ray
         Ray(glm::vec3 theStartingPoint, glm::vec3 theDirection, float theImportance, Scene *w);
         virtual ~Ray();
 
-        glm::vec3 calculateColor();
+        glm::vec3 rayTracedColor(int iteration);
+
+        int getIntersectedObject();
         //you shoot shadow rays from the ray-surface intersection point to the point light sources
-        glm::vec3 getLocalColor(glm::vec3 objColor, glm::vec3 n, glm::vec3 iPoint);
+        glm::vec3 getLocalColor(int objIdx);
 
 
         //the eye position
         glm::vec3 startingPoint;
         //diection of the random generated ray?
         glm::vec3 direction;
+
+        bool insideObject;
 
     private:
 
@@ -35,9 +39,10 @@ class Ray
         Ray *reflectedRay;
         Ray *refractedRay;
         //inside or outside an transperent object
-        bool insideObject;
+
 
         Scene *world;
+        int refractedObject;
 
 
 };

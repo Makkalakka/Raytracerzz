@@ -14,7 +14,8 @@ class Cube : public SceneObject
         virtual ~Cube();
 
         void initialize();
-        void computationOfChildrenRays();
+        glm::vec3 calculateReflectedRay(Ray r);
+        glm::vec3 calculateRefractedRay(Ray r);
 		bool intersection(Ray r);
 		glm::vec3 getLatestIntersection();
 		float getIntersectionDistance();
@@ -22,6 +23,9 @@ class Cube : public SceneObject
 		glm::vec3 getColor();
 
 		std::vector<Rectangle*> *walls;
+		bool isDiffuse;
+		bool isTransparent;
+		float diffuseIndex;
 
     private:
 		glm::vec3 position;

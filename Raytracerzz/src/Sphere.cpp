@@ -4,14 +4,16 @@
 #include <cmath>
 
 //one transperent and one perfect reflector
-Sphere::Sphere(glm::vec3 pos, float rad, float trans, float refract, glm::vec3 theColor)
+Sphere::Sphere(glm::vec3 pos, float rad, float diffIdx, float refract, glm::vec3 theColor, bool transparent)
 {
     position = pos;
     radius = rad;
-    transparency = trans;
+    diffuseIndex = diffIdx;
     refractiveIndex = refract;
     color = theColor;
-    insideSphere = false;
+    isDiffuse = false;
+    isTransparent = transparent;
+    diffuseIndex = diffIdx;
 }
 
 Sphere::~Sphere()
@@ -47,25 +49,25 @@ bool Sphere::intersection(Ray r)
     return true;
 }
 
- glm::vec3 Sphere::calculateReflectedRay(Ray r)
+glm::vec3 Sphere::calculateReflectedRay(Ray r)
 {
     glm::vec3 normal = glm::normalize(p0 - position); //normal of p0 intersection
 
-    return (r.direction - 2*(glm::dot(r.direction,normal))*normal);
+    return glm::normalize((r.direction - 2*(glm::dot(r.direction,normal))*normal));
 }
 
 glm::vec3 Sphere::calculateRefractedRay(Ray r)
 {
     glm::vec3 normal = glm::normalize(p0 - position);
 
-    if(insideSphere)
+    if(r.insideObject)
     {
-        insideSphere = false;
+        r.insideObject = false;
         return (refractiveIndex*r.direction + normal*(-refractiveIndex*glm::dot(normal,-(r.direction)) - (float)sqrt(1-pow(refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray out of the sphere
     }
     else
     {
-        insideSphere = true;
+        r.insideObject = true;
         return ((1/refractiveIndex)*r.direction + normal*(-1/refractiveIndex*glm::dot(normal,-(r.direction)) - (float)sqrt(1-pow(1/refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray into the sphere
     }
 }
