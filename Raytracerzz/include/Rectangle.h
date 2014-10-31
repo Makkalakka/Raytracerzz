@@ -16,24 +16,28 @@ class Rectangle : public SceneObject
         glm::vec3 calculateReflectedRay(Ray r);
         glm::vec3 calculateRefractedRay(Ray r);
         glm::vec3 getLatestIntersection();
+        glm::vec3 getSecondIntersection();
         float getIntersectionDistance();
         glm::vec3 getIntersectionNormal();
         glm::vec3 getColor();
-        bool isDiffuse;
-        bool isTransparent;
-        float diffuseIndex;
+        bool isDiffuse();
+        bool isTransparent();
+        float getDiffuseIndex();
+        glm::vec3 getPosition();
 
     protected:
     private:
 		glm::vec3 corner1, corner2, corner3, corner4;
         glm::vec3 basV1, basV2;
 		glm::vec3 normal;
-		glm::vec3 origin;
 		float distance;
 		glm::vec3 P;
 		glm::vec3 objectColor;
 
 		float refractiveIndex;
+		bool diffuse;
+		bool transparent;
+		float diffuseIndex;
 
 };
 

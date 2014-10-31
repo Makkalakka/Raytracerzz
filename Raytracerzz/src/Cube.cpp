@@ -9,12 +9,11 @@ Cube::Cube(glm::vec3 pos, double d, bool t, double idx, glm::vec3 color)
 {
     position = pos;
 	size = d;
-	transparent = t;
 	refractiveIndex = idx;
 	objectColor = color;
 	walls = new std::vector<Rectangle*>();
-	isDiffuse = true;
-	isTransparent = false;
+	diffuse = true;
+	transparent = t;
 	diffuseIndex = 1;
 }
 
@@ -83,6 +82,11 @@ glm::vec3 Cube::getLatestIntersection()
     return intersectionPoint;
 }
 
+glm::vec3 Cube::getSecondIntersection()
+{
+    return glm::vec3(0,0,0); //not implemented yet
+}
+
 float Cube::getIntersectionDistance()
 {
     return intersectionDistance;
@@ -104,3 +108,22 @@ glm::vec3 Cube::calculateRefractedRay(Ray r)
     return glm::vec3(0,0,1);
 }
 
+bool Cube::isDiffuse()
+{
+    return diffuse;
+}
+
+bool Cube::isTransparent()
+{
+    return transparent;
+}
+
+float Cube::getDiffuseIndex()
+{
+    return diffuseIndex;
+}
+
+glm::vec3 Cube::getPosition()
+{
+    return position;
+}

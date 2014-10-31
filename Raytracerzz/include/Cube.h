@@ -18,25 +18,29 @@ class Cube : public SceneObject
         glm::vec3 calculateRefractedRay(Ray r);
 		bool intersection(Ray r);
 		glm::vec3 getLatestIntersection();
+		glm::vec3 getSecondIntersection();
 		float getIntersectionDistance();
 		glm::vec3 getIntersectionNormal();
 		glm::vec3 getColor();
+		glm::vec3 getPosition();
 
 		std::vector<Rectangle*> *walls;
-		bool isDiffuse;
-		bool isTransparent;
-		float diffuseIndex;
+		bool isDiffuse();
+		bool isTransparent();
+		float getDiffuseIndex();
 
     private:
 		glm::vec3 position;
         float size;
-        bool transparent;
         double refractiveIndex;
         glm::vec3 objectColor;
 
         glm::vec3 intersectionPoint;
         float intersectionDistance;
         glm::vec3 intersectionNormal;
+        bool diffuse;
+        bool transparent;
+        float diffuseIndex;
 
 		//corner points
 		glm::vec3 p0, p1, p2, p3, p4, p5, p6, p7;

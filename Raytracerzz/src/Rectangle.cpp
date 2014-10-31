@@ -11,12 +11,11 @@ Rectangle::Rectangle(glm::vec3 v1, glm::vec3 v2, glm::vec3 v3, glm::vec3 v4, glm
     corner4 = v4;
     basV1 = v1 - v2;
     basV2 = v3 - v2;
-    origin = basV1 + basV2;
 	normal = n;
 	objectColor = theColor;
 	refractiveIndex = 1.0;
-	isDiffuse = true;
-	isTransparent = false;
+	diffuse = true;
+	transparent = false;
 	diffuseIndex = 1;
 }
 
@@ -100,4 +99,29 @@ glm::vec3 Rectangle::getIntersectionNormal()
 glm::vec3 Rectangle::getColor()
 {
     return objectColor;
+}
+
+bool Rectangle::isDiffuse()
+{
+    return diffuse;
+}
+
+bool Rectangle::isTransparent()
+{
+    return transparent;
+}
+
+float Rectangle::getDiffuseIndex()
+{
+    return diffuseIndex;
+}
+
+glm::vec3 Rectangle::getSecondIntersection()
+{
+    return glm::vec3(0,0,0);
+}
+
+glm::vec3 Rectangle::getPosition()
+{
+    return corner1;
 }

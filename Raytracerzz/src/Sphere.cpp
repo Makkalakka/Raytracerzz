@@ -4,15 +4,15 @@
 #include <cmath>
 
 //one transperent and one perfect reflector
-Sphere::Sphere(glm::vec3 pos, float rad, float diffIdx, float refract, glm::vec3 theColor, bool transparent)
+Sphere::Sphere(glm::vec3 pos, float rad, float diffIdx, float refract, glm::vec3 theColor, bool trans)
 {
     position = pos;
     radius = rad;
     diffuseIndex = diffIdx;
     refractiveIndex = refract;
     color = theColor;
-    isDiffuse = false;
-    isTransparent = transparent;
+    diffuse = false;
+    transparent = trans;
     diffuseIndex = diffIdx;
 }
 
@@ -58,17 +58,17 @@ glm::vec3 Sphere::calculateReflectedRay(Ray r)
 
 glm::vec3 Sphere::calculateRefractedRay(Ray r)
 {
-    glm::vec3 normal = glm::normalize(p0 - position);
+
 
     if(r.insideObject)
     {
-        r.insideObject = false;
-        return (refractiveIndex*r.direction + normal*(-refractiveIndex*glm::dot(normal,-(r.direction)) - (float)sqrt(1-pow(refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray out of the sphere
+        glm::vec3 normal = glm::normalize(position - p1);
+        return glm::normalize(refractiveIndex*r.direction + normal*(-refractiveIndex*glm::dot(normal,(r.direction)) - (float)sqrt(1-pow(refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray out of the sphere
     }
     else
     {
-        r.insideObject = true;
-        return ((1/refractiveIndex)*r.direction + normal*(-1/refractiveIndex*glm::dot(normal,-(r.direction)) - (float)sqrt(1-pow(1/refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray into the sphere
+        glm::vec3 normal = glm::normalize(p0 - position);
+        return glm::normalize((1/refractiveIndex)*r.direction + normal*(-1/refractiveIndex*glm::dot(normal,(r.direction)) - (float)sqrt(1-pow(1/refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray into the sphere
     }
 }
 
@@ -98,7 +98,7 @@ glm::vec3 Sphere::getP0()
     return p0;
 }
 
-glm::vec3 Sphere::getP1()
+glm::vec3 Sphere::getSecondIntersection()
 {
     return p1;
 }
@@ -112,3 +112,26 @@ float Sphere::getDistanceT1()
 {
     return 0;
 }
+
+bool Sphere::isDiffuse()
+{
+    return diffuse;
+}
+
+bool Sphere::isTransparent()
+{
+    return transparent;
+}
+
+float Sphere::getDiffuseIndex()
+{
+    return diffuseIndex;
+}
+
+glm::vec3 Sphere::getPosition()
+{
+    return position;
+}
+
+
+
