@@ -35,7 +35,7 @@ void Camera::renderImage(Scene &world)
 
     std::cout << "looping through pixels in image plane with resolution: " << width << "x" << height << std::endl;
 
-
+    int counter = 0;
 
     for(unsigned h = 1; h<=height; ++h)
     {
@@ -57,6 +57,8 @@ void Camera::renderImage(Scene &world)
 
             //std::cout << "shooting ray from pixel" << std::endl;
 
+            counter++;
+            //std::cout << "working on pixel nr: " << counter << std::endl;
             pix->shootRays();
 
             *pixelValue = pix->getColor();

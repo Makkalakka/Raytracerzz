@@ -23,8 +23,9 @@ Ray::~Ray()
 glm::vec3 Ray::rayTracedColor(int iteration)
 {
     //std::cout << "Iteration: " << iteration << std::endl;
-    if(iteration<4 && importance>0.1)
+    if(iteration<4 && importance>0.05)
     {
+        //std::cout << "iteration: " << iteration << std::endl;
 
         if(insideObject && (refractedObject != -1)) //maybe limit depending on iterations
         {
@@ -32,20 +33,22 @@ glm::vec3 Ray::rayTracedColor(int iteration)
             if(world->Objects->at(refractedObject)->intersection(*this))
             {
                 glm::vec3 secondIntersection = world->Objects->at(refractedObject)->getSecondIntersection();
-                glm::vec3 newRefractedDir = world->Objects->at(refractedObject)->calculateRefractedRay(*this);
                 glm::vec3 objectNormal = glm::normalize(secondIntersection - world->Objects->at(refractedObject)->getPosition());
 
-                Ray refractedRay = Ray(secondIntersection, newRefractedDir, importance, world);
+                /*float cosi = glm::dot(objectNormal, direction);
+                float refractiveIndex = 1.2;
+                float q = 1-refractiveIndex*refractiveIndex*(1-cosi*cosi);
 
-                if(glm::dot(newRefractedDir, objectNormal) <= 0)
+                if(q<0)
                 {
-                    refractedRay.insideObject = true;
-                    //return glm::vec3(0,0,0);
-                }
+                    std::cout << "q = " << q << std::endl;
+                    return glm::vec3(0,0,0);
+                }*/
 
 
-                //logic for calculating new direction
-                //check for brewster angle... set ray to inside if reached
+                glm::vec3 newRefractedDir = world->Objects->at(refractedObject)->calculateRefractedRay(*this);
+
+                Ray refractedRay = Ray(secondIntersection, newRefractedDir, importance, world);
 
                 return refractedRay.rayTracedColor(++iteration);
             }
@@ -71,8 +74,8 @@ glm::vec3 Ray::rayTracedColor(int iteration)
                         glm::vec3 localColor = getLocalColor(objIdx); //local color contribution
 
                         float diffuseFactor = world->Objects->at(objIdx)->getDiffuseIndex(); //how diffuse is the object?
-                        float newImportance = (importance - diffuseFactor*importance)*0.7;
-                        float reflectedImportance = (importance - diffuseFactor*importance)*0.3;
+                        float refractedImportance = (importance - diffuseFactor*importance)*0.9;
+                        float reflectedImportance = (importance - diffuseFactor*importance)*0.1;
 
                         //calculate reflected ray direction
                         glm::vec3 reflectedDir = world->Objects->at(objIdx)->calculateReflectedRay(*this);
@@ -80,7 +83,7 @@ glm::vec3 Ray::rayTracedColor(int iteration)
 
                         //calculate refracted ray
                         glm::vec3 refractedDir = world->Objects->at(objIdx)->calculateRefractedRay(*this);
-                        Ray refractedRay = Ray(world->Objects->at(objIdx)->getLatestIntersection(), refractedDir, newImportance, world);
+                        Ray refractedRay = Ray(world->Objects->at(objIdx)->getLatestIntersection(), refractedDir, refractedImportance, world);
                         refractedRay.insideObject = true;
                         refractedRay.refractedObject = objIdx;
 
@@ -201,7 +204,7 @@ glm::vec3 Ray::getLocalColor(int objIdx)
             glm::vec3 specularity = glm::vec3(0,0,0);
 
             if(specular)
-                specularity = (float)0.9*(float)pow(glm::dot(n,H), 20)*glm::vec3(1,1,1);//(d/5);
+                specularity = (float)pow(glm::dot(n,H), 40)*glm::vec3(1,1,1);//(d/5);*/
 
             if(lambertian >= 0)
             {

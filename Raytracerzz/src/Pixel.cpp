@@ -34,7 +34,7 @@ void Pixel::shootRays()
 
         glm::vec3 rayDir = glm::normalize(newPoint - cameraPos);
 
-        Ray pixelRay = Ray(cameraPos, rayDir, 1.0, world);
+        Ray pixelRay = Ray(cameraPos, rayDir, (float)1.0, world);
 
         pixColor += pixelRay.rayTracedColor(0);
     }

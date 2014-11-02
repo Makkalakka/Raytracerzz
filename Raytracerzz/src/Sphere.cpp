@@ -1,7 +1,7 @@
 #include "../include/Sphere.h"
 #include "../include/Ray.h"
 #include <iostream>
-#include <cmath>
+#include <math.h>
 
 //one transperent and one perfect reflector
 Sphere::Sphere(glm::vec3 pos, float rad, float diffIdx, float refract, glm::vec3 theColor, bool trans)
@@ -23,9 +23,9 @@ Sphere::~Sphere()
 
 bool Sphere::intersection(Ray r)
 {
-    glm::vec3 L = position - r.startingPoint; //L is the vector between the ray.starting point and the sphere
+    glm::vec3 L = position - r.startingPoint; //L is the vector between the ray.starting point and the sphere center
 
-    float Tca = glm::dot(L,r.direction);
+    float Tca = glm::dot(L,glm::normalize(r.direction));
     if(Tca < 0)
     {
         return false;
@@ -62,8 +62,20 @@ glm::vec3 Sphere::calculateRefractedRay(Ray r)
 
     if(r.insideObject)
     {
+        //std::cout << "r.direction: " << r.direction.x << ", " << r.direction.y << ", " << r.direction.z << std::endl;
         glm::vec3 normal = glm::normalize(position - p1);
-        return glm::normalize(refractiveIndex*r.direction + normal*(-refractiveIndex*glm::dot(normal,(r.direction)) - (float)sqrt(1-pow(refractiveIndex,2)*(1-pow(glm::dot(normal,r.direction),2))))); //T is the refracted ray out of the sphere
+        float cosi = -glm::dot(normal, r.direction);
+        //std::cout << "dot(normal, r.direction) = " << cosi << std::endl;
+
+        float q = 1-refractiveIndex*refractiveIndex*(1-cosi*cosi);
+
+        if(q<0)
+        {
+            std::cout << "ray bounced inside of sphere" << std::endl;
+            return glm::normalize((r.direction - 2*(glm::dot(r.direction,normal))*normal));
+        }
+
+        return glm::normalize(refractiveIndex*r.direction + normal*(-refractiveIndex*glm::dot(normal, r.direction) - (float)sqrt(q))); //T is the refracted ray out of the sphere
     }
     else
     {

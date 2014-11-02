@@ -18,8 +18,8 @@ int main()
     float d = 15, h = 3, w = 4; //d = distance from camera, height, width
 
     //glm::vec3 position, float radius, float diffIdx, float refractiveIndex, glm::vec3 theColor, bool transparent
-    Sphere *sphere1 = new Sphere(glm::vec3(0.3, 8.2, -1.5), 0.8, 0, 1.3, glm::vec3(1,0,0), true);
-    Sphere *sphere2 = new Sphere(glm::vec3(-1.0, 8.5, -1.2), 0.7, 0, 1.0, glm::vec3(1,0,0.6), false);
+    Sphere *sphere1 = new Sphere(glm::vec3(1.2, 12, -2), 1.0, 0.1, 1.5, glm::vec3(1,0,0), true);
+    Sphere *sphere2 = new Sphere(glm::vec3(-2.0, 13, -2.2), 0.7, 0, 1.0, glm::vec3(1,0,0.6), false);
 
     Rectangle *rec = new Rectangle(glm::vec3(-w, d, h), glm::vec3(-w, d, -h), glm::vec3(w, d, -h), glm::vec3(w, d, h), glm::vec3(0, -1, 0), glm::vec3(0.5,0.5,0.5)); //back
     Rectangle *rec2 = new Rectangle(glm::vec3(-w, d, h), glm::vec3(-w, (d-2*w), h), glm::vec3(-w, (d-2*w), -h), glm::vec3(-w, d, -h), glm::vec3(1, 0, 0), glm::vec3(1,0,0)); //left
@@ -27,7 +27,7 @@ int main()
     Rectangle *rec4 = new Rectangle(glm::vec3(w, d, h), glm::vec3(w, d, -h), glm::vec3(w, (d-2*w), -h), glm::vec3(w, (d-2*w), h), glm::vec3(-1, 0, 0), glm::vec3(0,0,1)); //right
     Rectangle *rec5 = new Rectangle(glm::vec3(-w, d, h), glm::vec3(w, d, h), glm::vec3(w, (d-2*w), h), glm::vec3(-w, (d-2*w), h), glm::vec3(0, 0, -1), glm::vec3(0.2,0.2,0.2)); //roof
 
-    Cube *theCube = new Cube(glm::vec3(1.5, 11, -2.7), 1.5, false, 0, glm::vec3(0, 0.8, 0.3));
+    Cube *theCube = new Cube(glm::vec3(2, 13, -3), 1.5, false, 0, glm::vec3(0, 0.8, 0.3));
     theCube->initialize();
 
     world.addObject(theCube);
@@ -51,7 +51,7 @@ int main()
 
     cout << "Creating camera..." << endl;
 
-    Camera cam (720, 1280, 5, 1.5);
+    Camera cam (720, 1280, 1, 1.5);
 
     cout << "Starting rendering method" << endl;
 

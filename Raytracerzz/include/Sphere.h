@@ -31,12 +31,13 @@ class Sphere : public SceneObject
         bool isTransparent();
         float getDiffuseIndex();
         glm::vec3 getPosition();
+        float refractiveIndex; //>1.0, <1.5
 
     protected:
     private:
         glm::vec3 position;
         float radius;
-        float refractiveIndex; //>1.0, <1.5
+
         glm::vec3 color;
         float t0;
         float t1;
