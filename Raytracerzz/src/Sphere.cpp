@@ -145,5 +145,8 @@ glm::vec3 Sphere::getPosition()
     return position;
 }
 
-
+float Sphere::getRefractiveIndex()
+{
+    return refractiveIndex;
+}
 

@@ -125,3 +125,8 @@ glm::vec3 Rectangle::getPosition()
 {
     return corner1;
 }
+
+float Rectangle::getRefractiveIndex()
+{
+    return refractiveIndex;
+}

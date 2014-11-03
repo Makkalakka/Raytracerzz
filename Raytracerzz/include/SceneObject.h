@@ -22,6 +22,7 @@ class SceneObject
         virtual float getDiffuseIndex() = 0;
         virtual glm::vec3 getPosition() = 0;
         virtual glm::vec3 getSecondIntersection() = 0;
+        virtual float getRefractiveIndex() = 0;
 
 
     private:

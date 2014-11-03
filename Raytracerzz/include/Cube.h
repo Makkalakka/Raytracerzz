@@ -23,6 +23,7 @@ class Cube : public SceneObject
 		glm::vec3 getIntersectionNormal();
 		glm::vec3 getColor();
 		glm::vec3 getPosition();
+		float getRefractiveIndex();
 
 		std::vector<Rectangle*> *walls;
 		bool isDiffuse();

@@ -24,6 +24,7 @@ class Rectangle : public SceneObject
         bool isTransparent();
         float getDiffuseIndex();
         glm::vec3 getPosition();
+        float getRefractiveIndex();
 
     protected:
     private:

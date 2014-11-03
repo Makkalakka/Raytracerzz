@@ -127,3 +127,8 @@ glm::vec3 Cube::getPosition()
 {
     return position;
 }
+
+float Cube::getRefractiveIndex()
+{
+    return refractiveIndex;
+}

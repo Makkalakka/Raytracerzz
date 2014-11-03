@@ -32,6 +32,7 @@ class Sphere : public SceneObject
         float getDiffuseIndex();
         glm::vec3 getPosition();
         float refractiveIndex; //>1.0, <1.5
+        float getRefractiveIndex();
 
     protected:
     private:

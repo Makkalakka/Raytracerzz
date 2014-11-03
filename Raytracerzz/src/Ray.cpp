@@ -23,7 +23,7 @@ Ray::~Ray()
 glm::vec3 Ray::rayTracedColor(int iteration)
 {
     //std::cout << "Iteration: " << iteration << std::endl;
-    if(iteration<4 && importance>0.05)
+    if(iteration<7 && importance>0.05)
     {
         //std::cout << "iteration: " << iteration << std::endl;
 
@@ -35,20 +35,21 @@ glm::vec3 Ray::rayTracedColor(int iteration)
                 glm::vec3 secondIntersection = world->Objects->at(refractedObject)->getSecondIntersection();
                 glm::vec3 objectNormal = glm::normalize(secondIntersection - world->Objects->at(refractedObject)->getPosition());
 
-                /*float cosi = glm::dot(objectNormal, direction);
-                float refractiveIndex = 1.2;
+                float cosi = glm::dot(objectNormal, direction);
+                float refractiveIndex = world->Objects->at(refractedObject)->getRefractiveIndex();
                 float q = 1-refractiveIndex*refractiveIndex*(1-cosi*cosi);
-
-                if(q<0)
-                {
-                    std::cout << "q = " << q << std::endl;
-                    return glm::vec3(0,0,0);
-                }*/
-
 
                 glm::vec3 newRefractedDir = world->Objects->at(refractedObject)->calculateRefractedRay(*this);
 
                 Ray refractedRay = Ray(secondIntersection, newRefractedDir, importance, world);
+
+                if(q<0)
+                {
+                    refractedRay.insideObject = true;
+                }
+
+
+
 
                 return refractedRay.rayTracedColor(++iteration);
             }
@@ -73,9 +74,14 @@ glm::vec3 Ray::rayTracedColor(int iteration)
                     {
                         glm::vec3 localColor = getLocalColor(objIdx); //local color contribution
 
+                        float refIdx = world->Objects->at(objIdx)->getRefractiveIndex();
+
+                        float RefImp = pow((1 - refIdx)/(1+refIdx), 2);
+                        float RefractImp = 1-RefImp;
+
                         float diffuseFactor = world->Objects->at(objIdx)->getDiffuseIndex(); //how diffuse is the object?
-                        float refractedImportance = (importance - diffuseFactor*importance)*0.9;
-                        float reflectedImportance = (importance - diffuseFactor*importance)*0.1;
+                        float refractedImportance = (importance - diffuseFactor*importance)*RefractImp;
+                        float reflectedImportance = (importance - diffuseFactor*importance)*RefImp;
 
                         //calculate reflected ray direction
                         glm::vec3 reflectedDir = world->Objects->at(objIdx)->calculateReflectedRay(*this);
