@@ -22,14 +22,12 @@ Ray::~Ray()
 
 glm::vec3 Ray::rayTracedColor(int iteration)
 {
-    //std::cout << "Iteration: " << iteration << std::endl;
     if(iteration<7 && importance>0.05)
     {
-        //std::cout << "iteration: " << iteration << std::endl;
 
         if(insideObject && (refractedObject != -1)) //maybe limit depending on iterations
         {
-            //std::cout << "insideObject = " << insideObject << std::endl;
+
             if(world->Objects->at(refractedObject)->intersection(*this))
             {
                 glm::vec3 secondIntersection = world->Objects->at(refractedObject)->getSecondIntersection();
@@ -48,9 +46,6 @@ glm::vec3 Ray::rayTracedColor(int iteration)
                     refractedRay.insideObject = true;
                 }
 
-
-
-
                 return refractedRay.rayTracedColor(++iteration);
             }
             else
@@ -59,17 +54,11 @@ glm::vec3 Ray::rayTracedColor(int iteration)
         else
         {
             int objIdx = getIntersectedObject();
-            //std::cout << "objectIndex: " << objIdx << std::endl;
 
             if(objIdx != -1) //if an object have been intersected
             {
-                //std::cout << "isDiffuse = " << world->Objects->at(objIdx)->isDiffuse << std::endl;
-
                 if(!world->Objects->at(objIdx)->isDiffuse()) //Change nr of iterations
                 {
-                    //glm::vec3 localColor = getLocalColor(objIdx);
-
-
                     if(world->Objects->at(objIdx)->isTransparent()) //object is transparent, calculate two rays
                     {
                         glm::vec3 localColor = getLocalColor(objIdx); //local color contribution
@@ -99,16 +88,12 @@ glm::vec3 Ray::rayTracedColor(int iteration)
                     }
                     else //the object is reflective only
                     {
-                        //std::cout << "objectnr:" << objIdx << " is reflective but not transparent" << std::endl;
-
                         float diffuseFactor = world->Objects->at(objIdx)->getDiffuseIndex(); //how diffuse is the object?
                         float newImportance = importance - diffuseFactor*importance;
 
                         //calculate reflected ray direction
                         glm::vec3 reflectedDir = world->Objects->at(objIdx)->calculateReflectedRay(*this);
-
                         Ray reflectedRay = Ray(world->Objects->at(objIdx)->getLatestIntersection(), reflectedDir, newImportance, world);
-
                         glm::vec3 localColor = getLocalColor(objIdx);
 
 
@@ -116,9 +101,8 @@ glm::vec3 Ray::rayTracedColor(int iteration)
                     }
 
                 }
-                else
+                else //The object is diffuse
                 {
-                    //std::cout << "the object is diffuse" << std::endl;
                     return getLocalColor(objIdx)*importance;
                 }
 
@@ -139,8 +123,6 @@ int Ray::getIntersectedObject()
     int nrOfObj = world->Objects->size();
     int objectIdx = -1;
     float minDist = 999999;
-    //glm::vec3 rayColor = glm::vec3(0,0,0); //set to background color
-
 
     for(int i=0; i<nrOfObj; i++)
     {
@@ -153,11 +135,6 @@ int Ray::getIntersectedObject()
             }
         }
     }
-
-    //glm::vec3 theIntersection = world->Objects->at(i)->getLatestIntersection();
-            //std::cout << "found intersection at: " << theIntersection.x << ", " << theIntersection.y << ", " << theIntersection.z << std::endl;
-
-        //rayColor = getLocalColor(world->Objects->at(objectIdx)->getColor(), world->Objects->at(objectIdx)->getIntersectionNormal(), world->Objects->at(objectIdx)->getLatestIntersection());
     return objectIdx;
 
 }
@@ -217,13 +194,12 @@ glm::vec3 Ray::getLocalColor(int objIdx)
                 color += (lambertian * objColor + specularity) * world->Lights->at(i)->radiance / (d/3); //diffuse phong
             }
 
-            //color = glm::normalize(color);
         }
 
 
     }
 
-    return color;//(float)nrOfLights;
+    return color;
 }
 
 

@@ -71,7 +71,6 @@ glm::vec3 Sphere::calculateRefractedRay(Ray r)
 
         if(q<0)
         {
-            std::cout << "ray bounced inside of sphere" << std::endl;
             return glm::normalize((r.direction - 2*(glm::dot(r.direction,normal))*normal));
         }
 
