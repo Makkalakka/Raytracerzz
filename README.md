@@ -1,8 +1,8 @@
 Raytracerzz
 ===========
 
-a homemade raytracer
+a Whitted Ray tracer
 
-by
+implemented by
 
 Albin Törnqvist § Anton Albert
